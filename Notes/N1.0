@@ -1,0 +1,126 @@
+
+- C-ohjelmointikieli vs. muut kielet
+
+C-kieli on ohjelmointikielien sukupuussa kehittynyt B;stä ja ja kehittynyt C++,
+josta on kehittynyt Java, C# ja ADA
+
+
+
+- C vs. Java ("stereotyyppisesti")
+
+Käytännön eroja (tyypillisesti):
+
+Java: kääntäjä tuottaa tavukoodia, joten ajetaan virtuaalikoneessa. 
+        Voi ajaa kaikissa järjestelmissä
+        Virtuaalikone -> koodin suoritus hieman hidasta
+C: ohjelma käännetään suoraan konekielelle.
+        Pitää kääntä eri järjestelmille erikseen.
+        (Ongelma kuitenkin itse koodin järjestelmäriippuvuus...)
+        Optiomoi konekielikoodia -> koodin suoritus jokseenkin niin tehokasta, kuin
+        malhdollista
+Java: Valtavan laaja yhdenmukaisesti standardoitu luokkakirjasto. 
+        Käytä valmiita apuluokkia, tee vähemmän itse.
+C: hyvin suppea standaddikirjasto.
+        Tee-se-itse (tai käytä ulkopuolisia apukirjastoja)
+
+
+
+- C-ohjeman kääntämisen vaiheet
+
+                  Lähdekooodi Otsikkotiedostot
+                           /
+Esiprosessointi           V
+                Käännösyksikkö (translate unit)
+                    /
+                  /
+Käännös        /
+            V
+    Käännetty ohjelmakoodi                    Koodin tarvisetmat muut osat: ns kirjastot
+
+Linkitys      \                                                  /
+                  \                                          /
+                      \                                   /
+                        V                              V  
+                            Suorituskelpoinen ohjelma
+
+
+
+
+- C vs. Java ("stereotyyppisesti")...
+
+Merkittäviä itse ohjelmointikielten eroja:
+
+Ominaisuuksia, joita C-kielessä ei ole (mutta Javassa on):
+    Luokat.
+    Viittemuuttujat.
+    Automaattinen dynaamisen muistin vapatus.
+    Poikkeukset.
+Ominaisuuksia, jotka C-kielessä on (mutta Javassa ei ole):
+    Osoitinmuuttujat.
+    Tarkka dynaamisen muistin hallinta(vapatus itse).
+Javan syntaksi pohjatuu C-kieleen -> paljon kooditason yhtäöäisyyksiä:
+    for, while, switch, if/else, return yms. rakenteet samankaltaisia
+    Osittain samanlaiset primitiivityypit: chair int, float ja double
+    Perusoperaattorit (asetus, vertailut, aritmetiikka, ...)
+    Sulkeiden käyttö, funktion parametrin välitys 
+    Sinänsä "helppo" siirtyä Javasta C-kieleen tai päinvastoin
+
+
+- C vs. Java: Hello World
+
+  Java tiedostossa ("HelloWorld.java"):
+
+    class HelloWorld
+    {
+      public static void main(String [] args)
+      {
+        System.out.print("Hei maailma!\n");
+      }
+    }
+
+Kääntö : javac HelloWorld.java
+Suoritus virtuaalikoneella: java HelloWorld
+
+C (esim. tiedostossa "hello.c")
+
+    #include <stdio.h>
+    int main(void)
+    {
+      printf("Hei maailma!\n");
+      return 0;
+    }
+
+Kääntö (ilman erillistä nimeä): gcc.hello.c
+Suoritus ./a.out (Linux/OS X), a tai a.exe (Windows)
+
+
+
+
+- C-ohjelman rakenteesta
+
+Ohjelman suoritus alkaa funktiosta main, jolla kaksi vaihtoehtoista muotoa:
+
+      int main(void){
+          ...                        /* Ei käytetä komentorivi parametrejä*/
+          return kokonaisluku;       /* Palautusarvo: ohjelman "tulos". */
+        }
+
+      int main(int argc, char *argv[]){  /* Koventoriviparametrit. */
+          ...
+          return kokonaisluku;           /* Palautusarvo: ohjelman "tulos". */
+        }
+
+Tyypillisesti main plauttaa arvon 0, jos ohjelman ajo sujui ongelmitta.
+Main-funtion parametrit argc ja argv:
+    argc: komentoriviparametrien lukumäärä.
+    argv: komentoriviparametrit sisältävä merkkijonotaulukko
+      argv[0]: ohjelman kutsunimi.
+      argv[i], i=1 ... argc-1: varsinaiset komentoriviparametrit
+      
+
+
+
+
+
+
+
